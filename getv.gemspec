@@ -3,7 +3,7 @@
 require_relative 'lib/getv/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'getv'
+  spec.name          = 'getv-rs'
   spec.version       = Getv::VERSION
   spec.authors       = ['ryan-scheinberg']
   spec.email         = ['ryan.scheinberg@gmail.com']
