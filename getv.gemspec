@@ -5,17 +5,17 @@ require_relative 'lib/getv/version'
 Gem::Specification.new do |spec|
   spec.name          = 'getv'
   spec.version       = Getv::VERSION
-  spec.authors       = ['harbottle']
-  spec.email         = ['harbottle@room3d3.com']
+  spec.authors       = ['ryan-scheinberg']
+  spec.email         = ['ryan.scheinberg@gmail.com']
 
   spec.summary       = 'Pull package version numbers from the web in various ways.'
   spec.description   = 'Pull package version numbers from the web in various ways.'
-  spec.homepage      = 'https://github.com/liger1978/getv'
+  spec.homepage      = 'https://github.com/ryan-scheinberg/getv'
   spec.license       = 'MIT'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/liger1978/getv'
-  spec.metadata['changelog_uri'] = 'https://github.com/liger1978/getv'
+  spec.metadata['source_code_uri'] = 'https://github.com/ryan-scheinberg/getv'
+  spec.metadata['changelog_uri'] = 'https://github.com/ryan-scheinberg/getv'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

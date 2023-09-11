@@ -4,7 +4,8 @@ module Getv
   class Package
     # Getv::Package::Docker class
     class Docker < Package
-      def initialize(name, opts = {})
+      def initialize(name, opts = {}, no_owner_domains = [])
+        @no_owner_domains = no_owner_domains
         opts = defaults.merge(opts)
         opts = { user: nil, password: nil, auto_paginate: true }.merge(opts)
         opts = docker_defaults(name).merge(opts)
@@ -18,8 +19,13 @@ module Getv
         when 0
           { owner: 'library', repo: name, url: 'https://registry.hub.docker.com' }
         when 1
-          { owner: name.split('/')[0], repo: name.split('/')[1],
-            url: 'https://registry.hub.docker.com' }
+          if @no_owner_domains.include?(name.split('/')[0])
+            { owner: '', repo: name.split('/')[1],
+              url: "https://#{name.split('/')[0]}" }
+          else
+            { owner: name.split('/')[0], repo: name.split('/')[1],
+              url: 'https://registry.hub.docker.com' }
+          end
         else
           { owner: name.split('/')[1], repo: name.split('/')[2..].join('/'),
             url: "https://#{name.split('/')[0]}" }
@@ -40,7 +46,12 @@ module Getv
         require 'docker_registry2'
         retries ||= 0
         docker = DockerRegistry2.connect(opts[:url], docker_opts)
-        docker.tags("#{opts[:owner]}/#{opts[:repo]}", auto_paginate: opts[:auto_paginate])['tags'] || []
+        full_name = if opts[:owner].empty?
+                      opts[:repo]
+                    else
+                      "#{opts[:owner]}/#{opts[:repo]}"
+                    end
+        docker.tags(full_name, auto_paginate: opts[:auto_paginate])['tags'] || []
       rescue DockerRegistry2::NotFound
         []
       rescue StandardError => e
