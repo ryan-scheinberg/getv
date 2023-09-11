@@ -5,14 +5,14 @@ module Getv
   class Package
     attr_accessor :name, :opts
 
-    def self.create(name, opts = {}, no_owner_domains = [])
+    def self.create(name, opts = {})
       if opts.fetch(:type, nil).nil?
         opts.delete(:type)
         create_using_name(name, opts)
       else
         type = opts[:type]
         opts.delete(:type)
-        type_to_class(type).new name, opts, no_owner_domains
+        type_to_class(type).new name, opts
       end
     end
 
