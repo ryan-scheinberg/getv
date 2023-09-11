@@ -5,21 +5,21 @@ module Getv
     # Getv::Package::Docker class
     class Docker < Package
       def initialize(name, opts = {})
+        no_owner_domains = opts[:no_owner_domains] || []
         opts = defaults.merge(opts)
         opts = { user: nil, password: nil, auto_paginate: true, no_owner_domains: [] }.merge(opts)
-        opts = docker_defaults(name).merge(opts)
-
+        opts = docker_defaults(name, no_owner_domains).merge(opts)
         super name, opts
       end
 
       private
 
-      def docker_defaults(name)
+      def docker_defaults(name, no_owner_domains)
         case name.count('/')
         when 0
           { owner: 'library', repo: name, url: 'https://registry.hub.docker.com' }
         when 1
-          if opts[:no_owner_domains]&.include?(name.split('/')[0])
+          if no_owner_domains.include?(name.split('/')[0])
             { owner: '', repo: name.split('/')[1],
               url: "https://#{name.split('/')[0]}" }
           else
