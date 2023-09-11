@@ -19,7 +19,7 @@ module Getv
         when 0
           { owner: 'library', repo: name, url: 'https://registry.hub.docker.com' }
         when 1
-          if opts[:no_owner_domains].include?(name.split('/')[0])
+          if opts[:no_owner_domains]&.include?(name.split('/')[0])
             { owner: '', repo: name.split('/')[1],
               url: "https://#{name.split('/')[0]}" }
           else
