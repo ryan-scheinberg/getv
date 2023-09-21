@@ -5,11 +5,11 @@ require_relative 'lib/getv/version'
 Gem::Specification.new do |spec|
   spec.name          = 'getv-rs'
   spec.version       = Getv::VERSION
-  spec.authors       = ['ryan-scheinberg']
+  spec.authors       = ['ryan-scheinberg','harbottle']
   spec.email         = ['ryan.scheinberg@gmail.com']
 
   spec.summary       = 'Pull package version numbers from the web in various ways.'
-  spec.description   = 'Pull package version numbers from the web in various ways.'
+  spec.description   = 'Pull package version numbers from the web in various ways.  Forked from https://github.com/liger1978/getv'
   spec.homepage      = 'https://github.com/ryan-scheinberg/getv'
   spec.license       = 'MIT'
 
